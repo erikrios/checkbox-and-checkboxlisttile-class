@@ -7,7 +7,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) => MaterialApp(
         title: 'Demo Flutter',
         theme: ThemeData(primarySwatch: Colors.brown),
-        home: CheckboxHomePage(),
+        home: CheckboxTextFieldHomePage(),
       );
 }
 
@@ -115,6 +115,65 @@ class _CheckboxHomePageState extends State<CheckboxHomePage> {
                     width: 8.0,
                   ),
                   Text(this.bahasa[2])
+                ],
+              )
+            ],
+          ),
+        ),
+      );
+}
+
+/*
+This class used for the example of checkbox to activate or deactivate the textfield
+ */
+class CheckboxTextFieldHomePage extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => _CheckboxTextFieldHomePageState();
+}
+
+class _CheckboxTextFieldHomePageState extends State<CheckboxTextFieldHomePage> {
+  bool selected = false;
+
+  void onTextFieldChanged(String value) {
+    setState(() {
+      print(value);
+    });
+  }
+
+  void onCheckboxChanged(bool value) {
+    setState(() {
+      this.selected = value;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          title: Text('Demo Checkbox TextField'),
+        ),
+        body: Container(
+          padding: EdgeInsets.all(10.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              TextField(
+                enabled: !this.selected,
+                onChanged: (String value) {
+                  onTextFieldChanged(value);
+                },
+                decoration: InputDecoration(
+                    hintText: 'Ketik teks disini',
+                    hintStyle: TextStyle(fontStyle: FontStyle.normal)),
+              ),
+              Row(
+                children: <Widget>[
+                  Checkbox(
+                    value: this.selected,
+                    onChanged: (bool value) {
+                      onCheckboxChanged(value);
+                    },
+                  ),
+                  Text('Disable input box')
                 ],
               )
             ],
