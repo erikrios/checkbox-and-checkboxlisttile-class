@@ -7,12 +7,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) => MaterialApp(
         title: 'Demo Flutter',
         theme: ThemeData(primarySwatch: Colors.brown),
-        home: CheckboxTextFieldHomePage(),
+        home: CheckboxListTileHomePage(),
       );
 }
 
 /*
- * This class used for the example of checkbox
+ * This class is used for the example of checkbox
  */
 class CheckboxHomePage extends StatefulWidget {
   @override
@@ -124,7 +124,7 @@ class _CheckboxHomePageState extends State<CheckboxHomePage> {
 }
 
 /*
-This class used for the example of checkbox to activate or deactivate the textfield
+This class is used for the example of checkbox to activate or deactivate the textfield
  */
 class CheckboxTextFieldHomePage extends StatefulWidget {
   @override
@@ -175,6 +175,97 @@ class _CheckboxTextFieldHomePageState extends State<CheckboxTextFieldHomePage> {
                   ),
                   Text('Disable input box')
                 ],
+              )
+            ],
+          ),
+        ),
+      );
+}
+
+/*
+ *This class is used for the example of checkboxlisttile
+ */
+class CheckboxListTileHomePage extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => _CheckboxListTileHomePageState();
+}
+
+class _CheckboxListTileHomePageState extends State<CheckboxListTileHomePage> {
+  final List<String> bahasa = ['Java', 'Kotlin', 'Dart'];
+  bool selectedOne = false;
+  bool selectedTwo = false;
+  bool selectedThree = false;
+  List<int> list = [];
+
+  void onChangedOne(bool value) {
+    setState(() {
+      this.selectedOne = value;
+    });
+    if (value)
+      list.add(0);
+    else
+      list.remove(0);
+    print(list);
+  }
+
+  void onChangedTwo(bool value) {
+    setState(() {
+      this.selectedTwo = value;
+    });
+    if (value)
+      list.add(1);
+    else
+      list.remove(1);
+    print(list);
+  }
+
+  void onChangedThree(bool value) {
+    setState(() {
+      this.selectedThree = value;
+    });
+    if (value)
+      list.add(2);
+    else
+      list.remove(2);
+    print(list);
+  }
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          title: Text('Demo CheckboxListTile'),
+        ),
+        body: Container(
+          padding: EdgeInsets.all(10.0),
+          child: Column(
+            children: <Widget>[
+              Text('Bahasa yang disukai:'),
+              CheckboxListTile(
+                value: this.selectedOne,
+                onChanged: (bool value) {
+                  onChangedOne(value);
+                },
+                title: Text(this.bahasa[0]),
+                activeColor: Colors.red,
+                secondary: Icon(Icons.language),
+              ),
+              CheckboxListTile(
+                value: this.selectedTwo,
+                onChanged: (bool value) {
+                  onChangedTwo(value);
+                },
+                title: Text(this.bahasa[1]),
+                activeColor: Colors.red,
+                secondary: Icon(Icons.language),
+              ),
+              CheckboxListTile(
+                value: this.selectedThree,
+                onChanged: (bool value) {
+                  onChangedThree(value);
+                },
+                title: Text(this.bahasa[2]),
+                activeColor: Colors.red,
+                secondary: Icon(Icons.language),
               )
             ],
           ),
